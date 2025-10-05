@@ -46,7 +46,7 @@ public class TIENDADB {
             }
             a.setIdCategoria(categoria);
             
-            // ✅ GUARDAR EN LA BASE DE DATOS ssdsdse
+            // ✅ GUARDAR EN LA BASE DE DATOS ssdsdseasdasdas
             em.getTransaction().begin();
             em.persist(a);
             em.getTransaction().commit();
