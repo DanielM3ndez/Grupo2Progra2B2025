@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="gt.edu.umg_TIENDADB_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>gt.edu.umg.tiendadb.Categoria</class>
+    <class>gt.edu.umg.tiendadb.Compra</class>
+    <class>gt.edu.umg.tiendadb.Factura</class>
+    <class>gt.edu.umg.tiendadb.Usuario</class>
+    <class>gt.edu.umg.tiendadb.Cliente</class>
+    <class>gt.edu.umg.tiendadb.DetalleVenta</class>
+    <class>gt.edu.umg.tiendadb.Producto</class>
+    <class>gt.edu.umg.tiendadb.Venta</class>
+    <class>gt.edu.umg.tiendadb.Rol</class>
+    <class>gt.edu.umg.tiendadb.DetalleFactura</class>
+    <class>gt.edu.umg.tiendadb.DetalleCompra</class>
+    <class>gt.edu.umg.tiendadb.Proveedor</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://DANNKO:1433;databaseName=TiendaDB;encrypt=true;trustServerCertificate=true;"/>
+      <property name="javax.persistence.jdbc.user" value="UserTienda"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.password" value="UserTienda"/>
+    </properties>
+  </persistence-unit>
+</persistence>
