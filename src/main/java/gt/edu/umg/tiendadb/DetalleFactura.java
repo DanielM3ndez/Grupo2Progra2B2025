@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,22 +36,22 @@ public class DetalleFactura implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idDetalleFactura", nullable = false)
+    @Column(name = "idDetalleFactura")
     private Integer idDetalleFactura;
     @Basic(optional = false)
-    @Column(name = "cantidad", nullable = false)
+    @Column(name = "cantidad")
     private int cantidad;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @Column(name = "precioUnitario", nullable = false, precision = 18, scale = 2)
+    @Column(name = "precioUnitario")
     private BigDecimal precioUnitario;
-    @Column(name = "subtotal", precision = 29, scale = 2)
+    @Column(name = "subtotal")
     private BigDecimal subtotal;
-    @JoinColumn(name = "idFactura", referencedColumnName = "idFactura", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idFactura", referencedColumnName = "idFactura")
+    @ManyToOne(optional = false)
     private Factura idFactura;
-    @JoinColumn(name = "idProducto", referencedColumnName = "idProducto", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idProducto", referencedColumnName = "idProducto")
+    @ManyToOne(optional = false)
     private Producto idProducto;
 
     public DetalleFactura() {

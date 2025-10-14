@@ -12,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,21 +24,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author Daniel
  */
 @Entity
-@Table(name = "Factura", catalog = "TiendaDB", schema = "dbo", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"numeroDocumento"}),
-    @UniqueConstraint(columnNames = {"idVenta"})})
+@Table(name = "Factura", catalog = "TiendaDB", schema = "dbo")
 @NamedQueries({
     @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f"),
     @NamedQuery(name = "Factura.findByIdFactura", query = "SELECT f FROM Factura f WHERE f.idFactura = :idFactura"),
-    @NamedQuery(name = "Factura.findByTipoDocumento", query = "SELECT f FROM Factura f WHERE f.tipoDocumento = :tipoDocumento"),
-    @NamedQuery(name = "Factura.findByNumeroDocumento", query = "SELECT f FROM Factura f WHERE f.numeroDocumento = :numeroDocumento"),
+    @NamedQuery(name = "Factura.findBySerie", query = "SELECT f FROM Factura f WHERE f.serie = :serie"),
+    @NamedQuery(name = "Factura.findByNoFactura", query = "SELECT f FROM Factura f WHERE f.noFactura = :noFactura"),
     @NamedQuery(name = "Factura.findByNombreCliente", query = "SELECT f FROM Factura f WHERE f.nombreCliente = :nombreCliente"),
     @NamedQuery(name = "Factura.findByDocumentoCliente", query = "SELECT f FROM Factura f WHERE f.documentoCliente = :documentoCliente"),
     @NamedQuery(name = "Factura.findByMontoPago", query = "SELECT f FROM Factura f WHERE f.montoPago = :montoPago"),
@@ -53,42 +49,42 @@ public class Factura implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idFactura", nullable = false)
+    @Column(name = "idFactura")
     private Integer idFactura;
     @Basic(optional = false)
-    @Column(name = "tipoDocumento", nullable = false, length = 20)
-    private String tipoDocumento;
+    @Column(name = "Serie")
+    private String serie;
     @Basic(optional = false)
-    @Column(name = "numeroDocumento", nullable = false, length = 20)
-    private String numeroDocumento;
+    @Column(name = "NoFactura")
+    private String noFactura;
     @Basic(optional = false)
-    @Column(name = "nombreCliente", nullable = false, length = 100)
+    @Column(name = "nombreCliente")
     private String nombreCliente;
     @Basic(optional = false)
-    @Column(name = "documentoCliente", nullable = false, length = 20)
+    @Column(name = "documentoCliente")
     private String documentoCliente;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @Column(name = "montoPago", nullable = false, precision = 18, scale = 2)
+    @Column(name = "montoPago")
     private BigDecimal montoPago;
     @Basic(optional = false)
-    @Column(name = "montoCambio", nullable = false, precision = 18, scale = 2)
+    @Column(name = "montoCambio")
     private BigDecimal montoCambio;
     @Basic(optional = false)
-    @Column(name = "montoTotal", nullable = false, precision = 18, scale = 2)
+    @Column(name = "montoTotal")
     private BigDecimal montoTotal;
     @Column(name = "fechaRegistro")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaRegistro;
-    @Column(name = "estado", length = 20)
+    @Column(name = "estado")
     private String estado;
     @Lob
-    @Column(name = "observaciones", length = 2147483647)
+    @Column(name = "observaciones")
     private String observaciones;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFactura", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFactura")
     private Collection<DetalleFactura> detalleFacturaCollection;
-    @JoinColumn(name = "idVenta", referencedColumnName = "idVenta", nullable = false)
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "idVenta", referencedColumnName = "idVenta")
+    @OneToOne(optional = false)
     private Venta idVenta;
 
     public Factura() {
@@ -98,10 +94,10 @@ public class Factura implements Serializable {
         this.idFactura = idFactura;
     }
 
-    public Factura(Integer idFactura, String tipoDocumento, String numeroDocumento, String nombreCliente, String documentoCliente, BigDecimal montoPago, BigDecimal montoCambio, BigDecimal montoTotal) {
+    public Factura(Integer idFactura, String serie, String noFactura, String nombreCliente, String documentoCliente, BigDecimal montoPago, BigDecimal montoCambio, BigDecimal montoTotal) {
         this.idFactura = idFactura;
-        this.tipoDocumento = tipoDocumento;
-        this.numeroDocumento = numeroDocumento;
+        this.serie = serie;
+        this.noFactura = noFactura;
         this.nombreCliente = nombreCliente;
         this.documentoCliente = documentoCliente;
         this.montoPago = montoPago;
@@ -117,20 +113,20 @@ public class Factura implements Serializable {
         this.idFactura = idFactura;
     }
 
-    public String getTipoDocumento() {
-        return tipoDocumento;
+    public String getSerie() {
+        return serie;
     }
 
-    public void setTipoDocumento(String tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
+    public void setSerie(String serie) {
+        this.serie = serie;
     }
 
-    public String getNumeroDocumento() {
-        return numeroDocumento;
+    public String getNoFactura() {
+        return noFactura;
     }
 
-    public void setNumeroDocumento(String numeroDocumento) {
-        this.numeroDocumento = numeroDocumento;
+    public void setNoFactura(String noFactura) {
+        this.noFactura = noFactura;
     }
 
     public String getNombreCliente() {
